@@ -194,4 +194,41 @@ from the parent into your personal branch:
 
 #+BEGIN_EXAMPLE
 
-$ bzr merge
+$ bzr merge [source branch] [destination branch]
+Note that source can be remotely( a URL) or locally located.
+  
+#+END_EXAMPLE
+
+If different branches have made changes to the same areas of the same
+files, then merging them may generate conflicts. When this happens,
+Bazaar puts text markers like <<<<<<< into the files, and records them
+in a list of conflicted files. You should edit the files to reflect
+the way you want to resolve the conflicts, use "bzr diff" to check the
+changes, and then "bzr resolve" to mark them as resolved.
+
+These conflicts can then be resolved manually, and then committed.
+
+* bzr pull
+
+bzr pull is another command that can be used to get someone else's
+source code.  It , however, can only be used if the two branches are
+not diverged. Two branches are considered diverged if the destination
+branch's most recent commit is one that has not been merged (directly
+or indirectly) into the parent.In such a case, that is if branches
+have diverged, you can use 'bzr merge' to integrate the changes from
+one into the other.  Once one branch has merged, the other should be
+able to pull it again.
+ 
+ 
+* For further Help
+
+Bazaar has this inbuilt help feature, which gives topic based help
+articles .
+
+#+BEGIN_EXAMPLE
+
+$ bzr help topic
+
+#+END_EXAMPLE
+
+ 
