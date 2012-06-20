@@ -1,28 +1,107 @@
-#+TITLE: Version Control Systems
+#+TITLE: Version Control Systems And Virtual Labs
 #+AUTHOR: Piyush Bansal (201102022)
 #+STARTUP: hidestars
 #+STARTUP: overview
 
-* About Version Control Systems in general
- The modern versioning systems that we use are mostly distributed Version control Systems (DVCS).
-It means that a copy sits in a server accessible to many computers. 
-Whenever a checkout is made, the whole data is supplied to that computer, be it previous versions or any other changes made in the past. 
-However this is true only for Git,Mercurial,Bazaar,Darcs etc. 
-Svn , on the other hand, gives the user the latest copy only and not the full data.
-Since, if the user requires a previous copy  , he has to be connected to mainstream server, we can imagine the type of network overhead we would have.
-So svn is not a considerable option keeping in mind the above mentioned point and also the time it takes to commit.
+* Version Control Systems In General
+Version Control or Revision Control generally refers to management of changes in a document, large collaborative projects.
+Changes are generally identified by a number called revision number, with the initial version being 1.
+Each revision has a timestamp associated with it, which keep tracks of when those particular changes were made and by whom.
+Usually a large number of people happen to be working on same project, some of their versions have bugs and need to be tested before deployment.
+In such a scenario, it makes sense for some people to help debug some versions and make them fit for deployment. Naturally they would need to access the source codes,modify them and commit them back.
+Since Virtual labs too , is a large scale collaborative effort, where many lab developers contribute and many more test /debug their labs , it makes perfect sense for Virtual labs to use Version control systems.
+So , here we need to compare and contrast many available open source version control sytems, some of them being Subversion, Git and Bazaar.
 
-* Git or Bazaar
+* Two Broad Categories 
+Almost all Version Control Systems can be divided into two main categories, Concurrent Version System (CVS) and Distributed Version Control System (DVCS).
+A CVS is based on the idea that there is a single central copy , probably on a server , and all the contributers will "commit" their changes to this central copy.
+"Committing" a change simply means recording the change in the central system.Other contributers would be able to pull down this change, and probably update the contents of any file.\\
+#+ATTR_HTML: title =" CVS " align= "center" width="300" 
 
-Bazaar is considered to be easier to learn .Alsso it has better support for non linux operating systems compared to Git.
-Git though is complex to use and understand, But it has an altogether different architecture that makes it faster than bazaar.
-Most of the version control systems , consider new versions as some changes plus older version and hence store those changes , when requested a version , they apply those subsequent changes, and give us the required version .
-This process obviously is slower.
-On the other hand git , saves all the copies of data and not just the changes, hence faster.
-Also Git ensures better data integrity, due to checksumming by SHA-1 hash as compared to bazaar.
 
-* conclusion
+[[./cvs.png]]
 
-In my opinion Git should be used here at virtual labs, no doubt servers would take more disk space due to git storing complete copies of versions rather than just changes.
-But then we get more speed, better data integrity and also lesser network overhead.
-Also one of the biggest reason of me supporing git, is that it has more users and heNce support than any other version control systems .
+
+However, A DVCS is based on idea that its not important to rely on a central server for versions of the project.
+Instead every developer "clones" a copy of a repository and has the full history of project on his local machine.This copy (or clone) has all the metadata of the original.
+This method may sound wasteful, but in practice, it's not a problem. 
+Most programming projects consist mostly of plain text files (and maybe a few images), and disk space is so cheap that storing many copies of a file doesn't create a noticable dent in a hard drive's free space.
+Modern systems also compress the files to use even less space.\\
+
+
+#+ATTR_HTML: title =" DVCS " align= "center" width="300" 
+[[./dvcs.png]]
+
+
+** Advantages Of DVCS Over CVS
+ 1. Performing actions other than pushing and pulling changesets is extremely fast because the tool only needs to access the hard drive, not a remote server.
+ 2. Committing new changesets can be done locally without anyone else seeing them. 
+    Once we have a group of changesets ready, we can push all of them at once.
+ 3. Everything but pushing and pulling can be done without an internet connection. 
+    So we  can work on a plane, and we won't be forced to commit several bugfixes as one big changeset.
+ 4. Since each programmer has a full copy of the project repository, they can share changes with one or two other people at a time if they want to get some feedback before showing the changes to everyone.
+
+
+
+* Subversion
+Subversion , is a version control system developed by apache and distibuted under open source license, making it useful to virtual labs.
+It is comparitively an older version control system , and is a Concurrent Versions System (CVS).
+Subversion is largely network dependent , this also makes it slower , since commits and all such coomands utilise network resources .
+
+** Here are some points in favor of Subversion :
+
+1. Subversion is much easier to use, even by non programmers. 
+This factor is very useful because many of the lab developers are not expected to have such knowledge.
+2. It is unlikely that we would need to have two branches for a same lab development, so it makes to have sense to have a single central repository.
+3. Also Subversion has better support for windows , which is good since many lab developers may not be using linux, or may be comfortable with it .
+#+ATTR_HTML: title ="Svn Windows support" align= "center" width="600"
+[[./svn1.png]] 
+
+
+4. Subversion supports empty directories as well , since many a times during development process , we have empty directories that get populated later on.
+
+* Git 
+Git , again is a version control system , that happens to be a DVCS . 
+Written by linus for linux kernel development , this software was released and licensed under GNU general public license v2 , making it again useful to virtual labs.
+** Here are some points in favor of Git :
+
+1. Git , being distributed version control system , tends to be faster and poses lesser network overhead due to many requests being handled by it on the local machine itself.
+   Almost all the requests except the ones which need to connect to the server like pushing back or pulling down a copy , take place on local machine.
+2. Git is better for multiple branch development , suppose a scenario in which a single lab is being developed by two groups from the very beginning.
+3. The best part about git is that it uses SHA-1 checksum , that ensures better data integrity, also it has ,in general a better history integrity as well , since no change can be made to a previous version without it being noticed.
+4. Git has largest user base, which makes its documentation and other online guides available in larger proportion to other version control systems.Lab developers would have better support in its case.
+5. Git also has better architecture in some sense . Most of the version control systems , think of their data as an original version and all subsequent versions are stored as some changes to that original version.
+
+#+ATTR_HTML: title ="Other Versioning Systems" align= "center" width="300" 
+[[./1.png]]
+
+ 
+   However git stores each version independent of the previous version.
+   This makes it faster , since if we demand , say version 4, then other version control systems would try to apply changes on the base version and return it, which obviously takes more time .\\
+
+#+ATTR_HTML: title ="Git" align= "center" width="300" 
+[[./2.png]]
+
+* Bazaar
+Bazaar is yet another version control system , based on principles of a DVCS. Licensed under GPLv2 ,its also usable for virtual labs.
+Bazaar also has a large user base, making it an option to be considered , and equally potent as git , only having some minor changes.
+Bazaar is , but complex to use , and also is slower than git.
+** Here are some points in favor of Bazaar :
+
+1. Bazaar is also DVCS , so it has some of the benefits , same as git.
+2. Bazaar also has better windows support, like svn , giving it an edge over git.
+
+
+#+ATTR_HTML: title ="Git" align= "center" width="300" 
+[[./bzr1.png]]
+
+3. It also allows empty directories to be versioned , as in svn and unlike git. 
+   During lab development , some of the developers might want to leave some directories to be populated by other developers.
+
+* Conclusion
+In my opinion , we must implement and provide support to the lab developers by giving them option to work in whichever version control systems they want to use.
+As of now, I am aware of redmine being integrated  with Svn through plugin called svnadmin.Similar work needs to be done with git and bazaar.
+
+
+ 
+
