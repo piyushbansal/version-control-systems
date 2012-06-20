@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+lang="en" xml:lang="en">
+<head>
+<title>Version Control Systems</title>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2012-06-16 06:27:16 IST"/>
+<meta name="author" content="Piyush Bansal (201102022)"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+
+<h1 class="title">Version Control Systems</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 About Version Control Systems in general </a></li>
+<li><a href="#sec-2">2 Git or Bazaar </a></li>
+<li><a href="#sec-3">3 conclusion </a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> About Version Control Systems in general </h2>
+<div class="outline-text-2" id="text-1">
+
+<p>The modern versioning systems that we use are mostly distributed Version control Systems (DVCS).
+It means that a copy sits in a server accessible to many computers. 
+Whenever a checkout is made, the whole data is supplied to that computer, be it previous versions or any other changes made in the past. 
+However this is true only for Git,Mercurial,Bazaar,Darcs etc. 
+Svn , on the other hand, gives the user the latest copy only and not the full data.
+Since, if the user requires a previous copy  , he has to be connected to mainstream server, we can imagine the type of network overhead we would have.
+So svn is not a considerable option keeping in mind the above mentioned point and also the time it takes to commit.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Git or Bazaar </h2>
+<div class="outline-text-2" id="text-2">
+
+
+<p>
+Bazaar is considered to be easier to learn .Alsso it has better support for non linux operating systems compared to Git.
+Git though is complex to use and understand, But it has an altogether different architecture that makes it faster than bazaar.
+Most of the version control systems , consider new versions as some changes plus older version and hence store those changes , when requested a version , they apply those subsequent changes, and give us the required version .
+This process obviously is slower.
+On the other hand git , saves all the copies of data and not just the changes, hence faster.
+Also Git ensures better data integrity, due to checksumming by SHA-1 hash as compared to bazaar.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> conclusion </h2>
+<div class="outline-text-2" id="text-3">
+
+
+<p>
+In my opinion Git should be used here at virtual labs, no doubt servers would take more disk space due to git storing complete copies of versions rather than just changes.
+But then we get more speed, better data integrity and also lesser network overhead.
+Also one of the biggest reason of me supporing git, is that it has more users and hence support than any other version control systems .
+</p></div>
+</div>
+<div id="postamble">
+<p class="author"> Author: Piyush Bansal (201102022)
+<a href="mailto:solo@Solo">&lt;solo@Solo&gt;</a>
+</p>
+<p class="date"> Date: 2012-06-16 06:27:16 IST</p>
+<p class="creator">HTML generated by org-mode 6.33x in emacs 23</p>
+</div>
+</div>
+</body>
+</html>

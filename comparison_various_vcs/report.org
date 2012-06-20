@@ -1,0 +1,28 @@
+#+TITLE: Version Control Systems
+#+AUTHOR: Piyush Bansal (201102022)
+#+STARTUP: hidestars
+#+STARTUP: overview
+
+* About Version Control Systems in general
+ The modern versioning systems that we use are mostly distributed Version control Systems (DVCS).
+It means that a copy sits in a server accessible to many computers. 
+Whenever a checkout is made, the whole data is supplied to that computer, be it previous versions or any other changes made in the past. 
+However this is true only for Git,Mercurial,Bazaar,Darcs etc. 
+Svn , on the other hand, gives the user the latest copy only and not the full data.
+Since, if the user requires a previous copy  , he has to be connected to mainstream server, we can imagine the type of network overhead we would have.
+So svn is not a considerable option keeping in mind the above mentioned point and also the time it takes to commit.
+
+* Git or Bazaar
+
+Bazaar is considered to be easier to learn .Alsso it has better support for non linux operating systems compared to Git.
+Git though is complex to use and understand, But it has an altogether different architecture that makes it faster than bazaar.
+Most of the version control systems , consider new versions as some changes plus older version and hence store those changes , when requested a version , they apply those subsequent changes, and give us the required version .
+This process obviously is slower.
+On the other hand git , saves all the copies of data and not just the changes, hence faster.
+Also Git ensures better data integrity, due to checksumming by SHA-1 hash as compared to bazaar.
+
+* conclusion
+
+In my opinion Git should be used here at virtual labs, no doubt servers would take more disk space due to git storing complete copies of versions rather than just changes.
+But then we get more speed, better data integrity and also lesser network overhead.
+Also one of the biggest reason of me supporing git, is that it has more users and heNce support than any other version control systems .

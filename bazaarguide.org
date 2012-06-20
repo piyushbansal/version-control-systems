@@ -1,0 +1,197 @@
+#+TITLE: Bazaar Tutorial
+#+AUTHOR: Piyush Bansal (201102022)
+#+STARTUP: hidestars
+#+STARTUP: overview
+* What is a Version Control System ?
+Version Control or Revision Control generally refers to management of
+changes in a document, large collaborative projects.  Changes are
+generally identified by a number called revision number, with the
+initial version being 1.  Each revision has a timestamp associated
+with it, which keep tracks of when those particular changes were made
+and by whom.  Usually a large number of people happen to be working on
+same project, some of their versions have bugs and need to be tested
+before deployment.  In such a scenario, it makes sense for some people
+to help debug some versions and make them fit for
+deployment. Naturally they would need to access the source
+codes,modify them and commit them back.  Since Virtual labs too , is a
+large scale collaborative effort, where many lab developers contribute
+and many more test /debug their labs , it makes perfect sense for
+Virtual labs to use Version control systems.  So , here we need to
+compare and contrast many available open source version control
+sytems, some of them being Subversion, Git and Bazaar.
+* What is Bazaar ?
+Bazaar is a version control system , written in Python, Pyrex and C.
+It is a Distributed version control system , which mean that there is
+no central server that holds an original copy of the project. Every
+machine that happens to have a copy of the project can behave as that
+central server.Hence that project's documentation and source code
+* Getting bazaar on your local machine (Linux guide ,assuming python is already installed )
+remains distributed.Licenced under GPLv2 , bazaar is free to use.
+Download bazaar-xxx.tar.gz file from http://wiki.bazaar.canonical.com/Download .
+
+#+BEGIN_EXAMPLE
+$ tar -xvzf bazaar-xxx.tar.gz .
+$ cd bazaar-xxx
+$ python setup.py install.
+#+END_EXAMPLE
+ 
+Running bzr --version should tell if the installation is successful or not. 
+
+* Introducing Yourself to Bazaar 
+Bazaar records changes to source code, and it records who made the
+change. The person is identified by their name and email address. (If
+you're concerned about spam, you don't need to use a real address that
+you actually read,
+
+ but the convention is that it looks like an email
+address.)
+
+Before working let us tell bazaar who we are .
+
+#+BEGIN_EXAMPLE
+
+$ bzr whoami "Piyush Bansal <piyush.bansal@students.iiit.ac.in>"
+
+#+END_EXAMPLE
+
+Now we can check what identity is stored in bazaar.
+
+#+BEGIN_EXAMPLE
+
+$ bzr whoami
+Piyush Bansal <piyush.bansal@students.iiit.ac.in>
+
+#+END_EXAMPLE
+
+* Starting a new project
+Starting a project , would obviously require us to have a repository
+where all our source code , documentation is going to reside.  Let us
+create that repository first and call it 'sample'.It would a
+repository from wheer different developers can create different
+branches to test or modify specific features .
+
+
+#+BEGIN_EXAMPLE
+ 
+$ bzr init-repo sample
+Shared repository with trees (format: 2a)
+Location:
+  shared repository: sample
+
+#+END_EXAMPLE
+
+Now we would have to create a main branch of our project.
+
+#+BEGIN_EXAMPLE 
+
+$ cd sample
+$ bzr init sample/trunk 
+created a repository tree (format: 2a)
+Using shared repository: /home/username/sample
+
+#+END_EXAMPLE
+
+* Adding files
+Now that we have main repository and a main branch of our project. Let
+us begin by adding files to it.I would create an empty file first and
+then try to add it to repository.  Let us call our file 1.txt. Adding
+would tell bazaar that we want to keep track of changes to this file.
+
+
+#+BEGIN_EXAMPLE
+
+$ cd sample 
+$ touch 1.txt 
+$ bzr add 1.txt
+
+#+END_EXAMPLE
+
+And then "commiting" these changes would save this file and track its
+changes.Adding would just add the file to staging area, it needs to be
+committed before it can be used from repository by others by "cloning"
+the repository.
+
+#+BEGIN_EXAMPLE
+
+$ bzr cmmit -m "added first file with no lines in it"
+
+#+END_EXAMPLE
+
+* Making changes to your file
+
+Lets try to change our file and the again add it to our repository.
+
+#+BEGIN_EXAMPLE
+
+$ echo first line > 1.txt
+$ bzr add 1.txt
+adding 1.txt
+
+#+END_EXAMPLE
+
+Command - bzr diff shows changes between the last version of the file
+and its new version ,along with other useful information like current tree etc.
+
+#+BEGIN_EXAMPLE
+
+$ bzr diff
+=== modified file '1.txt'
+--- 1.txt 2012-06-18 7:16 +0000
++++ 1.txt 2012-06-18 7.06 +0000
+@@ -0,0 +1,1 @@
++ first line
+
+#+END_EXAMPLE
+
+Commit your work to the main bazaar branch.
+
+#+BEGIN_EXAMPLE
+
+$ bzr commit -m "Added first line of text"
+Committing to: /home/username/sample/trunk/
+added 1.txt
+Committed revision 1
+
+#+END_EXAMPLE
+
+* Viewing the revision log 
+
+You can see the history of your branch by browsing its log.
+
+#+BEGIN_EXAMPLE
+
+$ bzr log
+revno: 1
+committer :  Piyush Bansal <piyush.bansal@students.iiit.ac.in>
+branch nick: trunk 
+timestamp : Mon 2012-06-18 7:06 +0000
+message:
+       Initial import
+
+#+END_EXAMPLE
+ 
+* Creating your own copy of another branch 
+To work with someone else's code, you can make your copy of their
+branch( clone it).
+
+#+BEGIN_EXAMPLE
+
+$ bzr init-repo ~/bzr-someone's
+$ bzr branch lp:~bzr/bzr-someone/trunk ~/bzr-someone/username
+Branched xxx revison(s).
+
+#+END_EXAMPLE
+
+Note that the first part ie lp:~bzr/bzr-someone/trunk was the location
+of branch and ~/bzr-someone/username would be our cloned copy of that
+original branch.
+
+* Updating your branch from the main branch 
+While you commit changes to your branch, it's likely that other people
+will also continue to commit code to the parent branch.
+To make sure your branch stays up to date, you should merge changes
+from the parent into your personal branch:
+
+#+BEGIN_EXAMPLE
+
+$ bzr merge
